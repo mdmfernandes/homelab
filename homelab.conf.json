@@ -1,0 +1,129 @@
+{
+  "description": "Home lab configuration, release 5.3 'whinlatter'",
+  "expires": "2026-05-31",
+  "sources": {
+    "bitbake": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.openembedded.org/bitbake"
+          }
+        },
+        "branch": "2.16",
+        "rev": "2.16"
+      }
+    },
+    "openembedded-core": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.openembedded.org/openembedded-core"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    },
+    "meta-yocto": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.yoctoproject.org/meta-yocto"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    },
+    "meta-openembedded": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.openembedded.org/meta-openembedded"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    },
+    "meta-arm": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.yoctoproject.org/meta-arm"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    },
+    "meta-raspberrypi": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.yoctoproject.org/meta-raspberrypi"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    },
+    "yocto-docs": {
+      "git-remote": {
+        "remotes": {
+          "origin": {
+            "uri": "https://git.yoctoproject.org/yocto-docs"
+          }
+        },
+        "branch": "whinlatter",
+        "rev": "whinlatter"
+      }
+    }
+  },
+  "bitbake-setup": {
+    "configurations": [
+      {
+        "name": "homelab",
+        "description": "Home Lab Linux for Raspberry Pi",
+        "setup-dir-name": "homelab-whinlatter",
+        "bb-layers": [
+          "openembedded-core/meta",
+          "meta-yocto/meta-poky",
+          "meta-openembedded/meta-oe",
+          "meta-arm/meta-arm",
+          "meta-arm/meta-arm-toolchain",
+          "meta-raspberrypi"
+        ],
+        "bb-layers-file-relative": [
+          "layers/meta-homelab",
+          "layers/meta-rpi-optee"
+        ],
+        "oe-fragments-one-of": {
+          "machine": {
+            "description": "Target machines",
+            "options": [
+              {
+                "name": "machine/raspberrypi4-64",
+                "description": "Raspberry Pi 4"
+              },
+              {
+                "name": "machine/raspberrypi4-64-optee",
+                "description": "Raspberry Pi 4 with OP-TEE"
+              }
+            ]
+          },
+          "distro": {
+            "description": "Target distributions",
+            "options": [
+              {
+                "name": "distro/homelab",
+                "description": "Home Lab Linux"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "version": "1.0"
+}
